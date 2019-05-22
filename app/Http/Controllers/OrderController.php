@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+Use Auth;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -14,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Order::with(['product'])->get(),200);
     }
 
     /**
@@ -35,7 +36,18 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order=Order::create([
+            'product_id'=>$request->product_id,
+            'user_id'=>Auth::id(),
+            'quantity'=>$request->quantity,
+            'adress'=>$request->adress
+        ]);
+
+        return response()->json([
+            'status'=>(bool) $order,
+            'data'=>$order,
+            'message'=>$order? 'Order created! ' : 'There was an error while creating order'
+        ]);
     }
 
     /**
@@ -46,7 +58,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return response()->json($order,200);
     }
 
     /**
@@ -69,7 +81,14 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $status=$order->update(
+            $request->only(['quantity'])
+        );
+
+        return response()->json([
+            'status'=>$status,
+            'message'=>$status? 'Order updated!' : 'Error while updating order.'
+        ]);
     }
 
     /**
@@ -80,6 +99,22 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $status=$order->delete();
+
+        return response()->json([
+            'status'=>$status,
+            'message'=>$status? 'Order deleted! ' : 'Error while deleting order.'
+        ]);
+    }
+
+    public function deliverOrder(Order $order){
+        $order->is_delivered=true;
+        $status=$order->save();
+
+        return response()->json([
+            'status'=>$status,
+            'data'=>$status,
+            'message'=>$status? 'Order delivered! ' : 'Error while delivering order.'
+        ]);
     }
 }
