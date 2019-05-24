@@ -42,6 +42,7 @@ export default {
     },
     methods: {
         setDefaults(){
+            //sets the name of logged in user, and the type of user logged in
             if(this.isLoggedIn){
                 let user = JSON.parse(localStorage.getItem('bigStore.user'))
                 this.name=user.name
@@ -49,6 +50,7 @@ export default {
             }
         },
         change(){
+            //checks the login status
             this.isLoggedIn = localStorage.getItem('bigStore.jwt') !=null
             this.setDefaults()
         },
