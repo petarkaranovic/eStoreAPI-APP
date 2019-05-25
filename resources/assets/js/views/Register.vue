@@ -71,11 +71,16 @@ export default {
 
             axios.post('api/register', {name, email, password, password_confirmation}).then(response=>{
                 let data = response.data
+                localStorage.setItem('bigStore.user', JSON.stringify(data.user))
+                localStorage.setItem('bigStore.jwt', data.token)
+                if(localStorage.getItem('bigStore.jwt') !=null){
+                    this.$emit('loggedIn')
+                    let nextUrl=this.$route.params.nextUrl
+                    this.$router.push((nextUrl != null ? nextUrl : '/'))
+                }
             })
-
         }
     }
-
 }
 </script>
 
