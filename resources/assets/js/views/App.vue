@@ -33,8 +33,8 @@ export default {
     data(){
         return{
             name:null,
-            user_type=0,
-            isLoggedIn= localStorage.getItem('bigStore.jwt') !=null
+            user_type:0,
+            isLoggedIn : localStorage.getItem('bigStore.jwt') !=null
         }
     },
     mounted(){
