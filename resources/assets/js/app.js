@@ -53,7 +53,7 @@ const router = new VueRouter ({
             component:UserBoard,
             meta: {
                 requiresAuth: true,
-                is_user=true
+                is_user:true
             }
         },
         {
@@ -61,8 +61,8 @@ const router = new VueRouter ({
             name:'admin-pages',
             component:Admin,
             meta: {
-                requiresAuth = true,
-                is_admin = true
+                requiresAuth : true,
+                is_admin : true
             }
         },
         {
@@ -70,8 +70,8 @@ const router = new VueRouter ({
             name:'admin',
             component:Admin,
             meta: {
-                requiresAuth= true,
-                is_admin=true 
+                requiresAuth : true,
+                is_admin:true 
             }
         },
     ],
