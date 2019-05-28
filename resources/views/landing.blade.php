@@ -7,15 +7,12 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>Big Store</title>
     <link href=" {{ mix('css/app.css') }}" rel="stylesheet">
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" > --}}
 </head>
 <body>
     <div id="app">
-       <app> </app>
+        <app></app>
     </div>
     <script src="{{ mix('js/bootstrap.js') }}"></script>
-    {{-- <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script> --}}
     <script src="{{ mix('js/app.js') }}"></script>
-    {{-- <script type="text/javascript" src="{{ asset('js/app.js') }}"></script> --}}
 </body>
 </html>
